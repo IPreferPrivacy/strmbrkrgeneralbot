@@ -36,12 +36,12 @@ p { font-size: 12px; margin: 24px;}
 </style>
 </head>
 <body>
-<h1>slam-tg-mirror-bot: <a href="https://github.com/breakdowns/slam-tg-mirror-bot">@Github</a></h1>
+<h1>Stormbreaker Mirror Bots</h1>
 <form action="{form_url}" method="POST">
 
 {My_content}
 
-<input type="submit" name="Select these files ;)">
+<input type="submit" name="Select the files to be downloaded">
 </form>
 
 <script>
@@ -119,7 +119,7 @@ Slam Torrent Files
   <div class="form-group">
     <label for="pin_code">Pin Code</label>
     <input type="text" class="form-control" name="pin_code" placeholder="Enter code to access the torrent">
-    <small class="form-text text-muted">Dont mess around. You download will get messed up.</small>
+    <small class="form-text text-muted">⚠️Dont mess around. Your download may get messed up.</small>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
@@ -277,7 +277,7 @@ async def set_priority(request):
 @routes.get('/')
 async def homepage(request):
 
-    return web.Response(text="<h1>See slam-tg-mirror-bot <a href='https://github.com/breakdowns/slam-tg-mirror-bot'>@GitHub</a> By <a href='https://github.com/breakdowns'>Breakdowns</a></h1>",content_type="text/html")
+    return web.Response(text="<h1>Stormbreaker Mirror Bots</h1>",content_type="text/html")
 
 async def e404_middleware(app, handler):
 
