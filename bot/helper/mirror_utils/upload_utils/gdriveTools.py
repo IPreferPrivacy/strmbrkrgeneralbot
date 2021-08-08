@@ -558,9 +558,9 @@ class GoogleDriveHelper:
                     content += f'<b> | <a href="https://telegra.ph/{self.path[nxt_page]}">Next</a></b>'
                     nxt_page += 1
             Telegraph(access_token=telegraph_token).edit_page(path = self.path[prev_page],
-                                 title = 'Slam Tg Mirror Bot Search',
-                                 author_name='Slam Tg Mirror Bot',
-                                 author_url='https://github.com/breakdowns/slam-tg-mirror-bot',
+                                 title = 'Stormbreaker Drive Search',
+                                 author_name='Stormbreaker Mirror Bot Mirror Bot',
+                                 author_url='https://t.me/StormbreakerMirrorBot',
                                  html_content=content)
         return
 
