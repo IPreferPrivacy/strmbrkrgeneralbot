@@ -522,16 +522,15 @@ section span{
     <header>
       <div class="brand">
         <img
-          src="https://telegra.ph/file/6507910fd06d18dfaba82.jpg"
+          src="https://telegra.ph/file/15a893963f42e71af1fc3.png"
           alt="logo"
         />
         <a href="https://t.me/SlamMirrorUpdates">
-          <h2 class="name">slam-mirrorbot</h2>
+          <h2 class="name">Stormbreaker Mirror Bot</h2>
         </a>
       </div>
       <div class="social">
-        <a href="https://github.com/SlamDevs/slam-mirrorbot"><i class="fab fa-github"></i></a>
-        <a href="https://t.me/SlamMirrorUpdates"><i class="fab fa-telegram"></i></a>
+        <a href="https://t.me/kstbh"><i class="fab fa-telegram"></i></a>
       </div>
     </header>
     <section>
@@ -713,11 +712,11 @@ async def e404_middleware(app, handler):
         try:
             response = await handler(request)
             if response.status == 404:
-                return web.Response(text="<h1>404: Page not found</h2><br><h3>slam-mirrorbot</h3>", content_type="text/html")
+                return web.Response(text="<h1>404: Page not found</h2><br><h3>Stormbreaker Mirror Bot</h3>", content_type="text/html")
             return response
         except web.HTTPException as ex:
             if ex.status == 404:
-                return web.Response(text="<h1>404: Page not found</h2><br><h3>slam-mirrorbot</h3>", content_type="text/html")
+                return web.Response(text="<h1>404: Page not found</h2><br><h3>Stormbreaker Mirror Bot</h3>", content_type="text/html")
             raise
     return middleware_handler
 
