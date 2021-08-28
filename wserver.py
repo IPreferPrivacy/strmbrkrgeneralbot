@@ -197,16 +197,15 @@ input[type="submit"]:hover, input[type="submit"]:focus{
     <header>
       <div class="brand">
         <img
-          src="https://telegra.ph/file/6507910fd06d18dfaba82.jpg"
+          src="https://telegra.ph/file/15a893963f42e71af1fc3.png"
           alt="logo"
         />
-        <a href="https://t.me/SlamMirrorUpdates"> 
-          <h2 class="name">slam-mirrorbot</h2>
+        <a href="https://t.me/kstbh"> 
+          <h2 class="name">Stormbreaker Mirror Bot</h2>
         </a>
       </div>
       <div class="social">
-        <a href="https://github.com/SlamDevs/slam-mirrorbot"><i class="fab fa-github"></i></a>
-        <a href="https://t.me/SlamMirrorUpdates"><i class="fab fa-telegram"></i></a>
+        <a href="https://t.me/kstbh"><i class="fab fa-telegram"></i></a>
       </div>
     </header>
     <section>
@@ -525,7 +524,7 @@ section span{
           src="https://telegra.ph/file/15a893963f42e71af1fc3.png"
           alt="logo"
         />
-        <a href="https://t.me/SlamMirrorUpdates">
+        <a href="https://t.me/kstbh">
           <h2 class="name">Stormbreaker Mirror Bot</h2>
         </a>
       </div>
