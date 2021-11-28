@@ -62,8 +62,8 @@ def stats(update, context):
 
 def start(update, context):
     buttons = button_build.ButtonMaker()
-    buttons.buildbutton("Repo", "https://www.github.com/anasty17/mirror-leech-telegram-bot")
-    buttons.buildbutton("Owner", "https://t.me/anas_tayyar")
+    buttons.buildbutton("Repo", "https://www.github.com/kstbhh/mirror-leech-telegram-bot")
+    buttons.buildbutton("Owner", "https://t.me/kstbh")
     reply_markup = InlineKeyboardMarkup(buttons.build_menu(2))
     if CustomFilters.authorized_user(update) or CustomFilters.authorized_chat(update):
         start_string = f'''
@@ -161,7 +161,7 @@ help_string_telegraph = f'''<br>
 '''
 
 help = telegraph.create_page(
-        title='Mirror-Leech-Bot Help',
+        title='Stormbreaker Mirror Bot Help',
         content=help_string_telegraph,
     )["path"]
 
