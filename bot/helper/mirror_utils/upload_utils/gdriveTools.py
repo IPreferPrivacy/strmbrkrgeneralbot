@@ -679,7 +679,7 @@ class GoogleDriveHelper:
             elif not response["files"]:
                 continue
             if not Title:
-                msg += f'<h4>Search Result For {fileName}</h4><br><br>'
+                msg += f'<h4>Search Result For {fileName}</h4>'
                 Title = True
             if len(DRIVES_NAMES) > 1 and DRIVES_NAMES[index] is not None:
                 msg += f"╾────────────╼<br><b>{DRIVES_NAMES[index]}</b><br>╾────────────╼<br>"
@@ -725,7 +725,7 @@ class GoogleDriveHelper:
                             msg += f' <b>| <a href="{urls}">View Link</a></b>'
                 msg += '<br><br>'
                 contents_count += 1
-                if len(msg.encode('utf-8')) > 40000 :
+                if len(msg.encode('utf-8')) > 39000:
                     self.telegraph_content.append(msg)
                     msg = ""
             if noMulti:

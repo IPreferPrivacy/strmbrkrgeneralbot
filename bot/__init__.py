@@ -8,6 +8,7 @@ import socket
 import faulthandler
 import aria2p
 import psycopg2
+import json
 import qbittorrentapi as qba
 import telegram.ext as tg
 
@@ -63,6 +64,7 @@ alive = subprocess.Popen(["python3", "alive.py"])
 nox = subprocess.Popen(["qbittorrent-nox", "--profile=."])
 if not os.path.exists('.netrc'):
     subprocess.run(["touch", ".netrc"])
+subprocess.run(["cp", ".netrc", "/root/.netrc"])
 subprocess.run(["chmod", "600", ".netrc"])
 subprocess.run(["chmod", "+x", "aria.sh"])
 subprocess.run(["./aria.sh"], shell=True)
@@ -112,6 +114,23 @@ trackerslist = "\n\n".join(trackerslist)
 get_client().application.set_preferences({"add_trackers":f"{trackerslist}"})
 """
 
+def aria2c_init():
+    try:
+        if not os.path.isfile(".restartmsg"):
+            logging.info("Initializing Aria2c")
+            link = "https://releases.ubuntu.com/21.10/ubuntu-21.10-desktop-amd64.iso.torrent"
+            path = "/usr/src/app/"
+            aria2.add_uris([link], {'dir': path})
+            time.sleep(3)
+            downloads = aria2.get_downloads()
+            time.sleep(30)
+            for download in downloads:
+                aria2.remove([download], force=True, files=True)
+    except Exception as e:
+        logging.error(f"Aria2c initializing error: {e}")
+        pass
+
+threading.Thread(target=aria2c_init).start()
 
 DOWNLOAD_DIR = None
 BOT_TOKEN = None
@@ -378,6 +397,11 @@ try:
 except KeyError:
     EQUAL_SPLITS = False
 try:
+    QB_SEED = getConfig('QB_SEED')
+    QB_SEED = QB_SEED.lower() == 'true'
+except KeyError:
+    QB_SEED = False
+try:
     CUSTOM_FILENAME = getConfig('CUSTOM_FILENAME')
     if len(CUSTOM_FILENAME) == 0:
         raise KeyError
@@ -476,7 +500,20 @@ if os.path.exists('drive_folder'):
                 INDEX_URLS.append(temp[2])
             except IndexError as e:
                 INDEX_URLS.append(None)
-
+try:
+    SEARCH_PLUGINS = getConfig('SEARCH_PLUGINS')
+    if len(SEARCH_PLUGINS) == 0:
+        raise KeyError
+    SEARCH_PLUGINS = json.loads(SEARCH_PLUGINS)
+    qbclient = get_client()
+    qb_plugins = qbclient.search_plugins()
+    if qb_plugins:
+        for plugin in qb_plugins:
+            p = plugin['name']
+            qbclient.search_uninstall_plugin(names=p)
+    qbclient.search_install_plugin(SEARCH_PLUGINS)
+except KeyError:
+    SEARCH_PLUGINS = None
 
 updater = tg.Updater(token=BOT_TOKEN, request_kwargs={'read_timeout': 30, 'connect_timeout': 15})
 bot = updater.bot
