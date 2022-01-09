@@ -44,7 +44,7 @@ try:
         else:
             logging.error(f"Failed to download .netrc {res.status_code}")
     except Exception as e:
-        logging.error(str(e))
+        logging.error(f"NETRC_URL: {e}")
 except KeyError:
     pass
 try:
@@ -157,8 +157,8 @@ except KeyError as e:
     LOGGER.error("One or more env variables missing! Exiting now")
     exit(1)
 
-LOGGER.info("Generating USER_SESSION_STRING")
-app = Client('pyrogram', api_id=int(TELEGRAM_API), api_hash=TELEGRAM_HASH, bot_token=BOT_TOKEN, workers=343)
+LOGGER.info("Generating BOT_STRING_SESSION")
+app = Client('pyrogram', api_id=int(TELEGRAM_API), api_hash=TELEGRAM_HASH, bot_token=BOT_TOKEN, no_updates=True)
 
 try:
     USER_STRING_SESSION = getConfig('USER_STRING_SESSION')
@@ -429,7 +429,7 @@ try:
         else:
             logging.error(f"Failed to download token.pickle, link got HTTP response: {res.status_code}")
     except Exception as e:
-        logging.error(str(e))
+        logging.error(f"TOKEN_PICKLE_URL: {e}")
 except KeyError:
     pass
 try:
@@ -446,7 +446,7 @@ try:
             else:
                 logging.error(f"Failed to download accounts.zip, link got HTTP response: {res.status_code}")
         except Exception as e:
-            logging.error(str(e))
+            logging.error(f"ACCOUNTS_ZIP_URL: {e}")
             raise KeyError
         subprocess.run(["unzip", "-q", "-o", "accounts.zip"])
         os.remove("accounts.zip")
@@ -465,7 +465,7 @@ try:
         else:
             logging.error(f"Failed to download drive_folder, link got HTTP response: {res.status_code}")
     except Exception as e:
-        logging.error(str(e))
+        logging.error(f"MULTI_SEARCH_URL: {e}")
 except KeyError:
     pass
 try:
@@ -481,7 +481,7 @@ try:
         else:
             logging.error(f"Failed to download cookies.txt, link got HTTP response: {res.status_code}")
     except Exception as e:
-        logging.error(str(e))
+        logging.error(f"YT_COOKIES_URL: {e}")
 except KeyError:
     pass
 
