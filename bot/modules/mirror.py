@@ -91,11 +91,9 @@ class MirrorListener:
                 LOGGER.info('File to archive not found!')
                 self.onUploadError('Internal error occurred!!')
                 return
-            if self.isQbit and QB_SEED and not self.isLeech:
-                pass
-            else:
+            if not self.isQbit or not QB_SEED or self.isLeech:
                 try:
-                    rmtree(m_path, ignore_errors=True)
+                    rmtree(m_path)
                 except:
                     osremove(m_path)
         elif self.extract:
@@ -145,7 +143,6 @@ class MirrorListener:
             path = f'{DOWNLOAD_DIR}{self.uid}/{name}'
         up_name = PurePath(path).name
         up_path = f'{DOWNLOAD_DIR}{self.uid}/{up_name}'
-        size = get_path_size(f'{DOWNLOAD_DIR}{self.uid}')
         if self.isLeech and not self.isZip:
             checked = False
             for dirpath, subdir, files in walk(f'{DOWNLOAD_DIR}{self.uid}', topdown=False):
@@ -161,6 +158,7 @@ class MirrorListener:
                         fssplit(f_path, f_size, file_, dirpath, TG_SPLIT_SIZE)
                         osremove(f_path)
         if self.isLeech:
+            size = get_path_size(f'{DOWNLOAD_DIR}{self.uid}')
             LOGGER.info(f"Leech Name: {up_name}")
             tg = TgUploader(up_name, self)
             tg_upload_status = TgUploadStatus(tg, size, gid, self)
@@ -169,6 +167,7 @@ class MirrorListener:
             update_all_messages()
             tg.upload()
         else:
+            size = get_path_size(up_path)
             LOGGER.info(f"Upload Name: {up_name}")
             drive = GoogleDriveHelper(up_name, self)
             upload_status = UploadStatus(drive, size, gid, self)
