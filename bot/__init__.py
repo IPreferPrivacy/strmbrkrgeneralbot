@@ -161,7 +161,26 @@ try:
 except:
     USER_STRING_SESSION = None
     rss_session = None
-
+try:
+    QBIT_CONFIG_URL = getConfig('QBIT_CONFIG_URL')
+    if len(QBIT_CONFIG_URL) == 0:
+        raise KeyError
+    try:
+        res = rget(QBIT_CONFIG_URL)
+        if res.status_code == 200:
+            with open('qBittorrent.config', 'wb+') as f:
+                f.write(res.content)
+        else:
+            log_error(f"Failed to download qBit Config, link got HTTP response: {res.status_code}")
+    except Exception as e:
+        log_error(f"QBIT_CONFIG_URL: {e}")
+        raise KeyError
+    srun(["mkdir", "qBittorrent"])
+    srun(["chmod", "-R", "777", "qBittorrent"])
+    srun(["mv", "qBittorrent.conf", "qBittorrent\qBittorrent.config"])
+    osremove("qBittorrent.config")
+except:
+    pass
 def aria2c_init():
     try:
         log_info("Initializing Aria2c")
